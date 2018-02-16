@@ -2,8 +2,9 @@ import { Ingredient } from './../models/ingredient';
 export class ShoppingListService {
     private ingredients: Ingredient[] = [];
 
-    addItem(ingredient: Ingredient) {
-        this.ingredients.push(new Ingredient(ingredient.name, ingredient.amount));
+    addItem(name: string, amount: number) {
+        this.ingredients.push(new Ingredient(name, amount));
+        console.log(this.ingredients);
     }
 
     addItems(items: Ingredient[]) {
