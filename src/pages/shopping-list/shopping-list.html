@@ -40,4 +40,9 @@
       Add Item
     </button>
   </form>
+  <ion-list>
+    <ion-item *ngFor="let item of ListItem">
+      {{ item.name }} ({{ item.amount }})
+    </ion-item>
+  </ion-list>
 </ion-content>
