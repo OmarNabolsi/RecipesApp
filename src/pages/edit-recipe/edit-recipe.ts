@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavParams } from 'ionic-angular';
+import { IonicPage, NavParams, ActionSheetController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -12,7 +12,9 @@ export class EditRecipePage implements OnInit{
   selectOptions = ['Easy', 'Medium', 'Hard'];
   recipeForm: FormGroup;
 
-  constructor(private navParams: NavParams) {}
+  constructor(
+    private navParams: NavParams, 
+    private actionSheetCtrl: ActionSheetController) {}
 
   ngOnInit() {
     this.mode = this.navParams.get('mode');
@@ -24,7 +26,28 @@ export class EditRecipePage implements OnInit{
   }
 
   onManageIngredients() {
-    
+    const actionSheet = this.actionSheetCtrl.create({
+      title: 'What do you want to do?',
+      buttons: [
+        {
+          text: 'Add Ingredient',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Remove all Ingredients',
+          role: 'distructive',
+          handler: () => {
+
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
   }
 
   private initializeForm() {
