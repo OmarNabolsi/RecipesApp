@@ -1,3 +1,4 @@
+import { RecipeService } from './../services/recipe';
 import { ShoppingListService } from './../services/shopping-list';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -38,7 +39,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ShoppingListService
+    ShoppingListService,
+    RecipeService
   ]
 })
 export class AppModule {}
