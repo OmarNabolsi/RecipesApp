@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicPage, NavParams, ActionSheetController } from 'ionic-angular';
+import { IonicPage, NavParams, ActionSheetController, AlertController } from 'ionic-angular';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @IonicPage()
@@ -14,7 +14,8 @@ export class EditRecipePage implements OnInit{
 
   constructor(
     private navParams: NavParams, 
-    private actionSheetCtrl: ActionSheetController) {}
+    private actionSheetCtrl: ActionSheetController, 
+    private alertCtrl: AlertController) {}
 
   ngOnInit() {
     this.mode = this.navParams.get('mode');
@@ -45,6 +46,32 @@ export class EditRecipePage implements OnInit{
         {
           text: 'Cancel',
           role: 'cancel'
+        }
+      ]
+    });
+  }
+
+  private createNewIngredientAlert() {
+    const newIngredientAlert = this.alertCtrl.create({
+      title: 'Add Ingredient',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Name'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Add',
+          handler: data => {
+            if(data.name.trim() == '' || data.name == null) {
+
+            }
+          }
         }
       ]
     });
