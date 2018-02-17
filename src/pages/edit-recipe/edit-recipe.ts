@@ -19,6 +19,9 @@ export class EditRecipePage implements OnInit{
     this.initializeForm();
   }
 
+  onSubmit() {
+    console.log(this.recipeForm);
+  }
   private initializeForm() {
     this.recipeForm = new FormGroup({
       'title': new FormControl(null, Validators.required),
