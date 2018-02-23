@@ -45,7 +45,11 @@ export class ShoppingListService {
                 return response.json();
             })
             .do((data) => {
-                this.ingredients = data;
+                if (data) {
+                    this.ingredients = data;
+                } else {
+                    this.ingredients = [];
+                }
             });
     }
 }

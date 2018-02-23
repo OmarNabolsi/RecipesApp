@@ -50,42 +50,44 @@ export class ShoppingListPage {
     popover.present({ev: event});
     popover.onDidDismiss(
       data => {
-        if(data.action == 'load') {
-          loading.present();
-          this.authService.getActiveUser().getToken()
-            .then(
-              (token: string) => {
-                this.slService.fetchList(token)
-                  .subscribe(
-                    (list: Ingredient[]) => {
-                      loading.dismiss();
-                      if (list) {
-                        this.ListItem = list;
-                      } else {
-                        this.ListItem = [];
-                      }
-                    },
-                    error => {
-                      loading.dismiss();
-                      this.handleError(error.json().error);
-                    });
-              });
-        } else if (data.action == 'store') {
-          loading.present();
-          this.authService.getActiveUser().getToken()
-            .then(
-              (token: string) => {
-                this.slService.storeList(token)
-                  .subscribe(
-                    () => {
-                      loading.dismiss();
-                    },
-                    error => {
-                      loading.dismiss();
-                      this.handleError(error.json().error);
-                    });
-              });
-        }
+        if(data) {
+          if(data.action == 'load') {
+            loading.present();
+            this.authService.getActiveUser().getIdToken()
+              .then(
+                (token: string) => {
+                  this.slService.fetchList(token)
+                    .subscribe(
+                      (list: Ingredient[]) => {
+                        loading.dismiss();
+                        if (list) {
+                          this.ListItem = list;
+                        } else {
+                          this.ListItem = [];
+                        }
+                      },
+                      error => {
+                        loading.dismiss();
+                        this.handleError(error.json().error);
+                      });
+                });
+          } else if (data.action == 'store') {
+            loading.present();
+            this.authService.getActiveUser().getIdToken()
+              .then(
+                (token: string) => {
+                  this.slService.storeList(token)
+                    .subscribe(
+                      () => {
+                        loading.dismiss();
+                      },
+                      error => {
+                        loading.dismiss();
+                        this.handleError(error.json().error);
+                      });
+                });
+          }
+        } 
     });
   }
 

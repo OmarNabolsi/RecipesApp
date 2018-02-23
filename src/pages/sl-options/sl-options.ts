@@ -30,6 +30,11 @@ export class SLOptionsPage {
     }
     
     onAction(action: string) {
-        this.viewCtrl.dismiss({action: action});
+        if(action) {
+            this.viewCtrl.dismiss({action: action});
+        } else {
+            this.viewCtrl.dismiss();
+        }
+        
     }
 }

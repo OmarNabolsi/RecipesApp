@@ -47,7 +47,7 @@ export class RecipesPage {
       data => {
         if (data.action == 'load') {
           loading.present();
-          this.authService.getActiveUser().getToken()
+          this.authService.getActiveUser().getIdToken()
             .then((token: string) => {
               this.recipeService.fetchList(token)
                 .subscribe((list: Recipe[]) => {
@@ -62,9 +62,19 @@ export class RecipesPage {
                   loading.dismiss();
                   this.handleError(error.json().error);
                 });
-          })
+          });
         } else if (data.action = 'store') {
           loading.present();
+          this.authService.getActiveUser().getIdToken()
+            .then((token: string) => {
+              this.recipeService.storeList(token)
+                .subscribe(() => {
+                  loading.dismiss();
+                }, error => {
+                  loading.dismiss();
+                  this.handleError(error.json().error);
+                });
+            });
         }
       });
   }
