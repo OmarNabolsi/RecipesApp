@@ -46,7 +46,22 @@ export class ShoppingListPage {
     popover.onDidDismiss(
       data => {
         if(data.action == 'load') {
-
+          this.authService.getActiveUser().getToken()
+            .then(
+              (token: string) => {
+                this.slService.fetchList(token)
+                  .subscribe(
+                    (list: Ingredient[]) => {
+                      if (list) {
+                        this.ListItem = list;
+                      } else {
+                        this.ListItem = [];
+                      }
+                    },
+                    error => {
+                      console.log(error);
+                    });
+              });
         } else {
           this.authService.getActiveUser().getToken()
             .then(
@@ -56,10 +71,8 @@ export class ShoppingListPage {
                     () => console.log('Success!'),
                     error => {
                       console.log(error);
-                    }
-                  );
-              }
-            );
+                    });
+              });
         }
     });
   }
