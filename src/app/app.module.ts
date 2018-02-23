@@ -1,5 +1,5 @@
 import { HttpModule } from '@angular/http';
-import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
+import { SLOptionsPage } from './../pages/sl-options/sl-options';
 import { AuthService } from './../services/auth';
 import { SignupPage } from './../pages/signup/signup';
 import { SigninPage } from './../pages/signin/signin';

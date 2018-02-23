@@ -1,5 +1,5 @@
 import { AuthService } from './../../services/auth';
-import { SLOptionsPage } from './sl-options/sl-options';
+import { SLOptionsPage } from '../sl-options/sl-options';
 import { ShoppingListService } from './../../services/shopping-list';
 import { Component } from '@angular/core';
 import { IonicPage, PopoverController, LoadingController, AlertController } from 'ionic-angular';
@@ -91,10 +91,10 @@ export class ShoppingListPage {
 
   private handleError(errorMessage: string) {
     const alert = this.alertCtrl.create({
-      title: 'An error has occured!',
-      message: errorMessage,
-      buttons: ['Ok']
-    });
+                                title: 'An error has occured!',
+                                message: errorMessage,
+                                buttons: ['Ok']
+                              });
     alert.present();
   }
 }
