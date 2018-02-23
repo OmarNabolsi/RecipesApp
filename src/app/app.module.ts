@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { SLOptionsPage } from './../pages/shopping-list/sl-options/sl-options';
 import { AuthService } from './../services/auth';
 import { SignupPage } from './../pages/signup/signup';
@@ -31,7 +32,8 @@ import { TabsPage } from '../pages/tabs/tabs';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    HttpModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
