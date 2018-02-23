@@ -6,27 +6,41 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { SigninPage } from '../pages/signin/signin';
 import { SignupPage } from '../pages/signup/signup';
 import firebase from 'firebase';
+import { AuthService } from '../services/auth';
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  tabsPage = TabsPage;
+  rootPage: any = TabsPage;
   signinPage = SigninPage;
   signupPage = SignupPage;
+  isAuthenticated = false;
   @ViewChild('nav') nav: NavController;
 
   constructor(
         platform: Platform, 
         statusBar: StatusBar, 
         splashScreen: SplashScreen,
-        private menuCtrl: MenuController) {
+        private menuCtrl: MenuController, 
+        private authService: AuthService) {
 
       firebase.initializeApp({
         apiKey: "AIzaSyBb2VeTZt8tdpkx12oRdXrWf_9gJ1nl5f0",
         authDomain: "recipebook-275f2.firebaseapp.com"
       });
-      
+
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.isAuthenticated = true;
+          this.rootPage = TabsPage;
+        }
+        else {
+          this.isAuthenticated = false;
+          this.rootPage = SigninPage;
+        }
+      });
+
       platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
@@ -41,6 +55,7 @@ export class MyApp {
   }
 
   onLogout() {
-    
+    this.authService.logout();
+    this.menuCtrl.close();
   }
 }
