@@ -67,7 +67,7 @@ export class ShoppingListPage {
                     },
                     error => {
                       loading.dismiss();
-                      this.handleError(error.message);
+                      this.handleError(error.json().error);
                     });
               });
         } else if (data.action == 'store') {
@@ -82,7 +82,7 @@ export class ShoppingListPage {
                     },
                     error => {
                       loading.dismiss();
-                      this.handleError(error.message);
+                      this.handleError(error.json().error);
                     });
               });
         }
